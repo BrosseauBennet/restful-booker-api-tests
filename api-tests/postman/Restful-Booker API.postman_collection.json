@@ -1,0 +1,110 @@
+{
+  "info": {
+    "_postman_id": "cc8fe939-6b35-44ab-9bc9-48711f73e4ea",
+    "name": "Restful-Booker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38904960"
+  },
+  "item": [
+    {
+      "name": "Ping",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); }); \npm.test(\"Response time is under 2000ms\", function () { pm.expect(pm.response.responseTime).to.be.below(2000); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/ping",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "ping"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Booking IDs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); }); \npm.test(\"Returns a non-empty list with bookingid\", function () { const body = pm.response.json(); pm.expect(body).to.be.an(\"array\"); pm.expect(body.length).to.be.above(0); pm.expect(body[0]).to.have.property(\"bookingid\"); }); \npm.collectionVariables.set(\"bookingId\", pm.response.json()[0].bookingid);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/booking",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "booking"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Booking by ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); }); pm.test(\"Booking has the expected fields\", function () { const body = pm.response.json(); pm.expect(body).to.have.property(\"firstname\"); pm.expect(body).to.have.property(\"lastname\"); pm.expect(body).to.have.property(\"totalprice\"); pm.expect(body).to.have.property(\"bookingdates\"); }); "
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseURL}}/booking/{{bookingId}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingId}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": ""
+    },
+    {
+      "key": "bookingId",
+      "value": ""
+    }
+  ]
+}
