@@ -1,5 +1,7 @@
 # Restful-Booker API Tests
 
+![API Tests](https://github.com/BrosseauBennet/restful-booker-api-tests/actions/workflows/tests.yml/badge.svg)
+
 API test automation for the [Restful-Booker](https://restful-booker.herokuapp.com) practice API, built with Postman and Python (pytest + requests).
 
 Restful-Booker is a public API that simulates a hotel booking service. It's built for practicing API testing, so no account or API key is needed.
@@ -64,4 +66,3 @@ Each request has assertions on status code and response contents, and Ping also 
 ## Planned next steps
 
 - Authentication and create/update/delete (POST, PUT, DELETE) tests
-- GitHub Actions workflow to run the suite on every pull request
